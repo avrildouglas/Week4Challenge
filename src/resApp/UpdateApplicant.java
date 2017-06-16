@@ -1,40 +1,108 @@
 package resApp;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.mysql.jdbc.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- * Servlet implementation class UpdateApplicant
- */
-@WebServlet(description = "Adds Users", urlPatterns = { "/UpdateApplicant" })
-public class UpdateApplicant extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class UpdateApplicant {
 
-    /**
-     * Default constructor. 
-     */
-    public UpdateApplicant() {
-        // TODO Auto-generated constructor stub
-    }
+	private Connection conResume = null;
+	//private Statement stmtResume = null;
+	private PreparedStatement pstmtResume = null;
+	private ResultSet rstApp = null;
+	
+	public void AddApplicant(String appfName, String applName, String appeMail){
+	
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
+							+ "user=root&password=password");
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+			pstmtResume = conResume.prepareStatement("Insert into applicant(FirstName,LastName, Email) values(?,?,?)"); 
+   
+			//pstmtResume.setInt(1,10); 
+			pstmtResume.setString(1,appfName);
+			pstmtResume.setString(2,applName);
+			pstmtResume.setString(3,appeMail);
+			pstmtResume.executeUpdate();
+			
+			}catch  (SQLException e) {
+					e.printStackTrace();
+			}catch  (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		finally{
+			try{		
+				pstmtResume.close();
+				conResume.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+    	}
+	
+	public static String GetApplicant(String applName){
+		Connection conResume = null;
+		PreparedStatement pstmtResume = null;
+		ResultSet rstApp = null;
+		
+		String output = "";
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
+							+ "user=root&password=password");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+			pstmtResume = conResume.prepareStatement("select * from applicant where LastName = '"+ applName +"'"); 
+			
+			rstApp = pstmtResume.executeQuery();
+			
+			while (rstApp.next()) {
+				
+			}
+			//pstmtResume.setInt(1,10);
+			output += (rstApp.getString("FirstName") + rstApp.getString("LastName"));
+			output += (rstApp.getString("Email"));
+						
+			}catch  (SQLException e) {
+					e.printStackTrace();
+			}catch  (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		finally{
+			try{		
+				pstmtResume.close();
+				conResume.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return output;
+    	}
+	
 
+		public void DeleteApplicant(int AppId){
+		try{
+				Class.forName("com.mysql.jdbc.Driver");
+			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
+							+ "user=root&password=password");
+
+			pstmtResume = conResume.prepareStatement("DELETE FROM applicant WHERE ApplId = '"+ AppId + "'"); 
+			System.out.println(pstmtResume);			
+			}catch  (SQLException e) {
+				e.printStackTrace();
+			}catch  (ClassNotFoundException e) {
+				e.printStackTrace();
+			}finally{
+				try{		
+					pstmtResume.close();
+					conResume.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+				}
+   		}	
 }
