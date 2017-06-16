@@ -5,12 +5,23 @@
 <title>Creating Your Personal Resume</title>
 </head>
 <body>
-<form action="InputUser" method="post">
-Enter user's first name:<br>
+<h1>User Information</h1>
+<form action="InputUserServlet" method="post">
+	Enter user's first name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 <input type="text" name="firstName" value=""><br>
-Enter user's last name:<br>
-<input type="text" name="lastName" value=""><br>
+	Enter user's last name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	<input type="text" name="lastName" value=""><br>
 <input type="Submit" value="Add User"><br>
+</form>
+
+
+<form action="AddUserServlet" method="post">
+	User Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="username" value=""><br/>
+	Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="email" value=""><br/>
+	Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password" value=""><br/>
+	<input type="hidden" name="action" value="adduser"><br/>
+	<input type="submit" value="Add User">
 </form>
 </body>
 </html>
+
