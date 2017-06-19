@@ -47,7 +47,7 @@ public class UpdateExperience {
 				}
 		}
 	
-	public static String getExperience(int apId){
+	public static String getExperience(String ApEmail){
 		
 		Connection conResume = null;
 		PreparedStatement pstmtResume = null;
@@ -60,7 +60,7 @@ public class UpdateExperience {
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
 
-			pstmtResume = conResume.prepareStatement("select * from education where ApplId = '"+ apId +"'");
+			pstmtResume = conResume.prepareStatement("select * from education where Email = '"+ ApEmail +"'");
 			
 			rstExp = pstmtResume.executeQuery();
 			
@@ -87,12 +87,12 @@ public class UpdateExperience {
 		return outputExp;
 		}
 
-		public void DeleteExperience(int AppId){
+		public void DeleteExperience(String ApEmail){
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
-			pstmtResume = conResume.prepareStatement("DELETE FROM experience WHERE ApplId = '"+ AppId + "'"); 			
+			pstmtResume = conResume.prepareStatement("DELETE FROM experience WHERE Email = '"+ ApEmail + "'"); 			
 			}catch  (SQLException e) {	
 				e.printStackTrace();
 			}catch (ClassNotFoundException e){

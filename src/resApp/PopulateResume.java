@@ -21,7 +21,7 @@ public class PopulateResume extends HttpServlet {
 
     }
 	
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String nextPage = "/UserInfo.jsp";
 		String msgAp = resumeApp;
@@ -35,17 +35,31 @@ public class PopulateResume extends HttpServlet {
 		request.setAttribute("message", msgSk);
 		
 		getServletContext().getRequestDispatcher(nextPage).forward(request, response);
-	}
+	}*/
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		resumeApp = UpdateApplicant.GetApplicant(request.getParameter("lastName"));
-		resumeEd = UpdateApplicant.getEducation(request.getParameter("apId"));
-		resumeEx = UpdateApplicant.getExperience(request.getParameter("apId"));
-		resumeSk = UpdateApplicant.getSkill(request.getParameter("apId"));
+		String nextPage = "/UserInfo.jsp";
+		String msgAp = resumeApp;
+		String msgEd = resumeEd;
+		String msgEx = resumeEx;
+		String msgSk = resumeSk;
 		
-		doGet(request, response);
+		resumeApp = UpdateApplicant.GetApplicant(request.getParameter("email"));
+		request.setAttribute("message", msgAp);
+
+		resumeEd = UpdateEducation.GetEducation(request.getParameter("email"));
+		request.setAttribute("message", msgEd);
+	
+		resumeApp = UpdateExperience.GetExperience(request.getParameter("email"));
+		request.setAttribute("message", msgEx);
+
+		resumeApp = UpdateSkill.GetSkill(request.getParameter("email"));
+		request.setAttribute("message", msgSk);
+		
+		getServletContext().getRequestDispatcher(nextPage).forward(request, response);
+	
 	}
 
 }

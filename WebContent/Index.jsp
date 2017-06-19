@@ -13,8 +13,28 @@
 	First Name:&nbsp;<input type="text" name="firstName" value=""><br>
 	Last Name:&nbsp;<input type="text" name="lastName" value=""><br>
 	Email:&nbsp;<br><input type="text" name="email" value=""><br><br>
-	
+
 <!--	Education:<br>
+<%
+ArrayList arr = (ArrayList) session.getAttribute("list");
+String myString="";
+if(arr.isEmpty()==false){
+	for(int i = 0; i < arr.size(); i++)
+	{
+	myString = (String)arr.get(i);
+	}
+%>
+<tr>
+<td>
+project Name
+</td>
+<td>
+    <input type="text" name="education0" id="education0" size="50" value="<%=myString%>" disabled>
+</td>
+<td>
+    <input type="text" name="education1" id="education01" size="50" value="<%=myString%>" disabled>
+</td>
+</tr>
 	<input type="text" name="education" value=""><br>
 	<!-- <input type="text" name="education" value=""><br>
 	<input type="text" name="education" value=""><br>
@@ -60,9 +80,16 @@
 	<input type="text" name="skillrate[]" value=""> --> 
 	
 
+<button theme="primary" color="pulse" icon="next" disabled>Submit</button>
 	
 	<input type="submit" value="Add User Info" value=""><br><br>
-	
 </form>
+
+<form action="PopulateResume" method="post">
+Populate Resume<br>
+	By Email:&nbsp;<input type="text" name="email" value=""><br>
+<input type="submit" value="Generate Resume" value=""><br><br>
+</form>
+
 </body>
 </html>

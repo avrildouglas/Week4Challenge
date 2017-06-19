@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+
 public class UpdateEducation {
 
 	private Connection conResume = null;
@@ -24,7 +26,7 @@ public class UpdateEducation {
 							+ "user=root&password=password");
 
 			pstmtResume = conResume.prepareStatement("Insert into education(Education) values(?)"); 
-	   
+			pstmtResume = conResume.prepareStatement("Insert into experience(Experience) values(?)");
 			for (int k = 0; k < listEd.size()-1; k++){
 			//	pstmtResume.setInt(1, 201);
 				pstmtResume.setString(1, listEd.get(k).toString());
@@ -47,7 +49,7 @@ public class UpdateEducation {
 			}
 		}
 	
-	public static String getEducation(int apId){
+	public static String getEducation(String ApEmail){
 		
 		Connection conResume = null;
 		PreparedStatement pstmtResume = null;
@@ -60,7 +62,7 @@ public class UpdateEducation {
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
 
-			pstmtResume = conResume.prepareStatement("select * from education where ApplId = '"+ apId +"'");
+			pstmtResume = conResume.prepareStatement("select * from education where Email = '"+ ApEmail +"'");
 			
 			rstEdu = pstmtResume.executeQuery();
 			
@@ -88,13 +90,13 @@ public class UpdateEducation {
 		}
 	
 
-		public void DeleteEducation(int AppId){
+		public void DeleteEducation(String ApEmail){
 		try{
 			// 	Class.forName("com.mysql.jdbc.Driver");
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
 
-			pstmtResume = conResume.prepareStatement("DELETE FROM education WHERE ApplId = '"+ AppId + "'"); 			
+			pstmtResume = conResume.prepareStatement("DELETE FROM education WHERE Email = '"+ ApEmail + "'"); 			
 			}catch  (SQLException e) {
 			
 			}finally{

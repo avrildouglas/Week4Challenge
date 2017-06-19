@@ -48,7 +48,7 @@ public class UpdateSkill {
 				}
 		}
 	
-	public static String getSkill(int apId){
+	public static String getSkill(String ApEmail){
 		
 		Connection conResume = null;
 		PreparedStatement pstmtResume = null;
@@ -61,7 +61,7 @@ public class UpdateSkill {
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
 
-			pstmtResume = conResume.prepareStatement("select * from skills where ApplId = '"+ apId +"'");
+			pstmtResume = conResume.prepareStatement("select * from skills where Email = '"+ ApEmail +"'");
 			
 			rstSki = pstmtResume.executeQuery();
 			
@@ -89,13 +89,13 @@ public class UpdateSkill {
 		}
 	
 
-		public void DeleteSkill(int AppId){
+		public void DeleteSkill(String ApEmail){
 		try{
 			// 	Class.forName("com.mysql.jdbc.Driver");
 			conResume = DriverManager.getConnection("jdbc:mysql://localhost/resume?"
 							+ "user=root&password=password");
 
-			pstmtResume = conResume.prepareStatement("DELETE FROM skills WHERE ApplId = '"+ AppId + "'"); 			
+			pstmtResume = conResume.prepareStatement("DELETE FROM skills WHERE Email = '"+ ApEmail + "'"); 			
 			}catch  (SQLException e) {
 			
 			}finally{

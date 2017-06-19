@@ -9,23 +9,10 @@
 <body>
 
 <h1>User Information</h1><br>
-<h2>${message}</h2>
+<h2>${msgAp}</h2>
 <!-- h2>${seducation}</h2> -->
 <!-- <h2>${sexperience}</h2> -->
 <!-- <h2>${sskillrate}</h2> -->
-
-
-<!-- *hello.jsp**
-
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-    <c:forEach items="${list}" var="foo">
-     <tr>
-      <td><c:out value="${foo.name}" /></td>
-      <td><c:out value="${foo.age}" /></td>
-     </tr>
-    </c:forEach -->
-
 
 </body>
 </html>
