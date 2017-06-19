@@ -16,14 +16,24 @@
 
 <!--	Education:<br>
 <%
-ArrayList arr = (ArrayList) session.getAttribute("list");
+import.java.util.Arraylist;
+ArrayList arr = (ArrayList) session.getAttribute("listEd");
+listEd educate = new listEd("ed");
 String myString="";
-if(arr.isEmpty()==false){
-	for(int i = 0; i < arr.size(); i++)
-	{
-	myString = (String)arr.get(i);
-	}
+if(arr.isEmpty()==false)
+{
+for(int i = 0; i < arr.size(); i++)
+{
+myString = (String)arr.get(i);
+}
+}
+else
+{
+System.out.println("Array is empty");
+}
 %>
+
+<table width="4">
 <tr>
 <td>
 project Name
@@ -32,9 +42,10 @@ project Name
     <input type="text" name="education0" id="education0" size="50" value="<%=myString%>" disabled>
 </td>
 <td>
-    <input type="text" name="education1" id="education01" size="50" value="<%=myString%>" disabled>
+    <input type="text" name="education1" id="education1" size="50" value="<%=myString%>" disabled>
 </td>
 </tr>
+<! --
 	<input type="text" name="education" value=""><br>
 	<!-- <input type="text" name="education" value=""><br>
 	<input type="text" name="education" value=""><br>
@@ -84,7 +95,7 @@ project Name
 	
 	<input type="submit" value="Add User Info" value=""><br><br>
 </form>
-
+</table>
 <form action="PopulateResume" method="post">
 Populate Resume<br>
 	By Email:&nbsp;<input type="text" name="email" value=""><br>

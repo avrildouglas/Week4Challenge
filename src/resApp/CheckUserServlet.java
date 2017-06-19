@@ -51,7 +51,7 @@ public class CheckUserServlet extends HttpServlet {
 		session.setAttribute("semail", email);
 		ap.AddApplicant(firstName, lastName, email);
 		
-		
+ 
 	/**	session.setAttribute("seducation", education);
 		ed.addEducation(listEd);
 		
